@@ -1,0 +1,90 @@
+╔════════════════════════════════════════════════════════════════╗
+║              VELA WEBSITE - EMAIL SETUP QUICK GUIDE            ║
+╚════════════════════════════════════════════════════════════════╝
+
+⚠️  IMPORTANT: Gmail requires App Password, not regular password!
+
+┌────────────────────────────────────────────────────────────────┐
+│ STEP 1: Enable 2-Step Verification                            │
+├────────────────────────────────────────────────────────────────┤
+│ 1. Visit: https://myaccount.google.com/security               │
+│ 2. Click "2-Step Verification"                                │
+│ 3. Follow prompts to enable                                   │
+└────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│ STEP 2: Generate App Password                                 │
+├────────────────────────────────────────────────────────────────┤
+│ 1. Go back to Security page                                   │
+│ 2. Click "App passwords"                                      │
+│ 3. Select: Mail > Other (Vela Website)                        │
+│ 4. Click Generate                                             │
+│ 5. Copy the 16-character password                             │
+└────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│ STEP 3: Update Configuration                                  │
+├────────────────────────────────────────────────────────────────┤
+│ File: server/index.js                                         │
+│ Line: ~13                                                     │
+│                                                               │
+│ const transporter = nodemailer.createTransport({              │
+│   service: 'gmail',                                           │
+│   auth: {                                                     │
+│     user: 'ihorr30@gmail.com',                                │
+│     pass: 'vhoa scrf ugpx jxln'  // ✓ Already configured!    │
+│   }                                                           │
+│ });                                                           │
+└────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│ STEP 4: Start the Servers                                     │
+├────────────────────────────────────────────────────────────────┤
+│ Quick Start (Both servers):                                   │
+│   npm run start:all                                           │
+│                                                               │
+│ Or separately:                                                │
+│   Terminal 1: npm run dev         (Frontend)                 │
+│   Terminal 2: npm run server      (Backend)                  │
+└────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│ SERVER URLS                                                   │
+├────────────────────────────────────────────────────────────────┤
+│ Frontend:  http://localhost:5173                              │
+│ Backend:   http://localhost:3001                              │
+│ API:       http://localhost:3001/api/send-email               │
+│ Health:    http://localhost:3001/api/health                   │
+└────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│ TESTING                                                       │
+├────────────────────────────────────────────────────────────────┤
+│ 1. Open http://localhost:5173                                 │
+│ 2. Scroll to "Contact Us" section                             │
+│ 3. Fill and submit the form                                  │
+│ 4. Check ihorr30@gmail.com for the email                      │
+│ 5. Success toast should appear on submit                     │
+└────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│ TROUBLESHOOTING                                               │
+├────────────────────────────────────────────────────────────────┤
+│ ❌ Email not sending?                                         │
+│    → Check App Password (not regular password!)              │
+│    → Verify 2-Step Verification is enabled                   │
+│    → Check server logs for errors                            │
+│                                                               │
+│ ❌ Connection refused?                                        │
+│    → Ensure backend is running on port 3001                  │
+│    → Check for port conflicts: lsof -i :3001                 │
+│                                                               │
+│ ❌ CORS errors?                                               │
+│    → Backend must be on http://localhost:3001                │
+│    → Check Contact.jsx fetch URL                             │
+└────────────────────────────────────────────────────────────────┘
+
+📧 Email: ihorr30@gmail.com
+🔐 Gmail App Password: vhoa scrf ugpx jxln (✓ Configured)
+
+For detailed instructions, see: SETUP.md
